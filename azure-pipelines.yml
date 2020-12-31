@@ -27,3 +27,15 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/app/Dockerfile'
         tags: |
           $(tag)
+  - deployment: VMDeploy
+    displayName: web
+    pool:
+      vmImage: 'Windows Server 2008 R2 Datacenter'
+    environment:
+      name: DashboardRuntimeEnv
+      resourceType: VirtualMachine
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - script: echo my first deployment
